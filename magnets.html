@@ -1,0 +1,983 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_2e82fdee10b72e807904377c8ae1abd9 {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
+
+            <style>html, body {
+                width: 100%;
+                height: 100%;
+                margin: 0;
+                padding: 0;
+            }
+            </style>
+
+            <style>#map {
+                position:absolute;
+                top:0;
+                bottom:0;
+                right:0;
+                left:0;
+                }
+            </style>
+
+            <script>
+                L_NO_TOUCH = false;
+                L_DISABLE_3D = false;
+            </script>
+
+        
+</head>
+<body>
+    
+    
+<div id="lightbox-modal" style="
+    display: none; 
+    position: fixed; 
+    top: 0; 
+    left: 0; 
+    width: 100%; 
+    height: 100%; 
+    background-color: rgba(0, 0, 0, 0.85); 
+    z-index: 9999; 
+    justify-content: center; 
+    align-items: center; 
+    flex-direction: column;
+    backdrop-filter: blur(5px);
+" onclick="closeLightbox()">
+    
+    <span style="
+        position: absolute; 
+        top: 20px; 
+        right: 35px; 
+        color: white; 
+        font-size: 40px; 
+        font-weight: bold; 
+        cursor: pointer;
+        font-family: Arial, sans-serif;"
+    >&times;</span>
+
+    <img id="lightbox-img" src="" style="
+        max-width: 90%; 
+        max-height: 80%; 
+        border: 4px solid white; 
+        border-radius: 8px; 
+        box-shadow: 0 8px 25px rgba(0,0,0,0.5);
+        object-fit: contain;" 
+    />
+    
+    <div id="lightbox-caption" style="
+        margin-top: 15px; 
+        color: white; 
+        font-size: 18px; 
+        font-weight: 500;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        text-align: center;"
+    ></div>
+</div>
+
+<script>
+function openLightbox(imgUrl, caption) {
+    document.getElementById('lightbox-img').src = imgUrl;
+    document.getElementById('lightbox-caption').innerText = caption;
+    document.getElementById('lightbox-modal').style.display = 'flex';
+}
+
+function closeLightbox() {
+    document.getElementById('lightbox-modal').style.display = 'none';
+}
+
+document.addEventListener('keydown', function(event) {
+    if (event.key === 'Escape') {
+        closeLightbox();
+    }
+});
+</script>
+    
+            <div class="folium-map" id="map_2e82fdee10b72e807904377c8ae1abd9" ></div>
+        
+</body>
+<script>
+    
+    
+            var map_2e82fdee10b72e807904377c8ae1abd9 = L.map(
+                "map_2e82fdee10b72e807904377c8ae1abd9",
+                {
+                    center: [48.8566, 2.3522],
+                    crs: L.CRS.EPSG3857,
+                    ...{
+  "zoom": 5,
+  "zoomControl": true,
+  "preferCanvas": false,
+}
+
+                }
+            );
+            L.control.scale().addTo(map_2e82fdee10b72e807904377c8ae1abd9);
+
+            
+
+        
+    
+            var tile_layer_2c3fb7c2136fdbac57141672b396ae13 = L.tileLayer(
+                "https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}",
+                {
+  "minZoom": 0,
+  "maxZoom": 18,
+  "maxNativeZoom": 18,
+  "noWrap": false,
+  "attribution": "Esri World Street Map",
+  "subdomains": "abc",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            tile_layer_2c3fb7c2136fdbac57141672b396ae13.addTo(map_2e82fdee10b72e807904377c8ae1abd9);
+        
+    
+            var marker_b7e97626937083cc6a0722c2e7030419 = L.marker(
+                [52.3676, 4.9041],
+                {
+}
+            ).addTo(map_2e82fdee10b72e807904377c8ae1abd9);
+        
+    
+            var div_icon_6e2a807552c0384fc3ede6b9a7189024 = L.divIcon({
+  "html": "\n    \u003cdiv onclick=\"openLightbox(\u0027assets/magnets/full/Amsterdam.png\u0027, \u0027Amsterdam (Netherlands)\u0027)\" \n         style=\"\n            width: 48px; \n            height: 48px; \n            border: 3px solid white; \n            border-radius: 8px; \n            box-shadow: 0 4px 10px rgba(0,0,0,0.35); \n            background-color: #ffffff;\n            background-image: url(\u0027assets/magnets/thumbs/Amsterdam.png\u0027); \n            background-size: cover; \n            background-position: center; \n            background-repeat: no-repeat;\n            cursor: pointer;\n            transition: transform 0.2s ease-in-out;\"\n         onmouseover=\"this.style.transform=\u0027scale(1.2)\u0027;\"\n         onmouseout=\"this.style.transform=\u0027scale(1)\u0027;\"\n    \u003e\u003c/div\u003e\n    ",
+  "iconSize": [48, 48],
+  "iconAnchor": [24, 24],
+  "className": "empty",
+});
+        
+    
+            marker_b7e97626937083cc6a0722c2e7030419.bindTooltip(
+                `<div>
+                     Amsterdam - Click to enlarge
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_b7e97626937083cc6a0722c2e7030419.setIcon(div_icon_6e2a807552c0384fc3ede6b9a7189024);
+            
+    
+            var marker_45e1887dc2689c19df04a4192a0e60c0 = L.marker(
+                [41.3879, 2.1699],
+                {
+}
+            ).addTo(map_2e82fdee10b72e807904377c8ae1abd9);
+        
+    
+            var div_icon_b3cb069de6b51ce56fa5bfb7efecf9c5 = L.divIcon({
+  "html": "\n    \u003cdiv onclick=\"openLightbox(\u0027assets/magnets/full/Barcelona.jpg\u0027, \u0027Barcelona (Spain)\u0027)\" \n         style=\"\n            width: 48px; \n            height: 48px; \n            border: 3px solid white; \n            border-radius: 8px; \n            box-shadow: 0 4px 10px rgba(0,0,0,0.35); \n            background-color: #ffffff;\n            background-image: url(\u0027assets/magnets/thumbs/Barcelona.jpg\u0027); \n            background-size: cover; \n            background-position: center; \n            background-repeat: no-repeat;\n            cursor: pointer;\n            transition: transform 0.2s ease-in-out;\"\n         onmouseover=\"this.style.transform=\u0027scale(1.2)\u0027;\"\n         onmouseout=\"this.style.transform=\u0027scale(1)\u0027;\"\n    \u003e\u003c/div\u003e\n    ",
+  "iconSize": [48, 48],
+  "iconAnchor": [24, 24],
+  "className": "empty",
+});
+        
+    
+            marker_45e1887dc2689c19df04a4192a0e60c0.bindTooltip(
+                `<div>
+                     Barcelona - Click to enlarge
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_45e1887dc2689c19df04a4192a0e60c0.setIcon(div_icon_b3cb069de6b51ce56fa5bfb7efecf9c5);
+            
+    
+            var marker_aef98630d713b0bb5eea1199d37969f3 = L.marker(
+                [52.52, 13.405],
+                {
+}
+            ).addTo(map_2e82fdee10b72e807904377c8ae1abd9);
+        
+    
+            var div_icon_d87d9edc814830a0fa99991df3dec4e7 = L.divIcon({
+  "html": "\n    \u003cdiv onclick=\"openLightbox(\u0027assets/magnets/full/Berlin.png\u0027, \u0027Berlin (Germany)\u0027)\" \n         style=\"\n            width: 48px; \n            height: 48px; \n            border: 3px solid white; \n            border-radius: 8px; \n            box-shadow: 0 4px 10px rgba(0,0,0,0.35); \n            background-color: #ffffff;\n            background-image: url(\u0027assets/magnets/thumbs/Berlin.png\u0027); \n            background-size: cover; \n            background-position: center; \n            background-repeat: no-repeat;\n            cursor: pointer;\n            transition: transform 0.2s ease-in-out;\"\n         onmouseover=\"this.style.transform=\u0027scale(1.2)\u0027;\"\n         onmouseout=\"this.style.transform=\u0027scale(1)\u0027;\"\n    \u003e\u003c/div\u003e\n    ",
+  "iconSize": [48, 48],
+  "iconAnchor": [24, 24],
+  "className": "empty",
+});
+        
+    
+            marker_aef98630d713b0bb5eea1199d37969f3.bindTooltip(
+                `<div>
+                     Berlin - Click to enlarge
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_aef98630d713b0bb5eea1199d37969f3.setIcon(div_icon_d87d9edc814830a0fa99991df3dec4e7);
+            
+    
+            var marker_a6687c4bfc2253b77ee3cce162c059af = L.marker(
+                [46.3683, 14.1146],
+                {
+}
+            ).addTo(map_2e82fdee10b72e807904377c8ae1abd9);
+        
+    
+            var div_icon_362e78ce3168de5a8d6d70c029422863 = L.divIcon({
+  "html": "\n    \u003cdiv onclick=\"openLightbox(\u0027assets/magnets/full/Bled.jpg\u0027, \u0027Lake Bled (Slovenia)\u0027)\" \n         style=\"\n            width: 48px; \n            height: 48px; \n            border: 3px solid white; \n            border-radius: 8px; \n            box-shadow: 0 4px 10px rgba(0,0,0,0.35); \n            background-color: #ffffff;\n            background-image: url(\u0027assets/magnets/thumbs/Bled.jpg\u0027); \n            background-size: cover; \n            background-position: center; \n            background-repeat: no-repeat;\n            cursor: pointer;\n            transition: transform 0.2s ease-in-out;\"\n         onmouseover=\"this.style.transform=\u0027scale(1.2)\u0027;\"\n         onmouseout=\"this.style.transform=\u0027scale(1)\u0027;\"\n    \u003e\u003c/div\u003e\n    ",
+  "iconSize": [48, 48],
+  "iconAnchor": [24, 24],
+  "className": "empty",
+});
+        
+    
+            marker_a6687c4bfc2253b77ee3cce162c059af.bindTooltip(
+                `<div>
+                     Lake Bled - Click to enlarge
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_a6687c4bfc2253b77ee3cce162c059af.setIcon(div_icon_362e78ce3168de5a8d6d70c029422863);
+            
+    
+            var marker_e14c70bcee108274c474ff80e6b46b0e = L.marker(
+                [48.1486, 17.1077],
+                {
+}
+            ).addTo(map_2e82fdee10b72e807904377c8ae1abd9);
+        
+    
+            var div_icon_80b735a5a07116a610e0d9b7162dd86a = L.divIcon({
+  "html": "\n    \u003cdiv onclick=\"openLightbox(\u0027assets/magnets/full/Bratislava.png\u0027, \u0027Bratislava (Slovakia)\u0027)\" \n         style=\"\n            width: 48px; \n            height: 48px; \n            border: 3px solid white; \n            border-radius: 8px; \n            box-shadow: 0 4px 10px rgba(0,0,0,0.35); \n            background-color: #ffffff;\n            background-image: url(\u0027assets/magnets/thumbs/Bratislava.png\u0027); \n            background-size: cover; \n            background-position: center; \n            background-repeat: no-repeat;\n            cursor: pointer;\n            transition: transform 0.2s ease-in-out;\"\n         onmouseover=\"this.style.transform=\u0027scale(1.2)\u0027;\"\n         onmouseout=\"this.style.transform=\u0027scale(1)\u0027;\"\n    \u003e\u003c/div\u003e\n    ",
+  "iconSize": [48, 48],
+  "iconAnchor": [24, 24],
+  "className": "empty",
+});
+        
+    
+            marker_e14c70bcee108274c474ff80e6b46b0e.bindTooltip(
+                `<div>
+                     Bratislava - Click to enlarge
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_e14c70bcee108274c474ff80e6b46b0e.setIcon(div_icon_80b735a5a07116a610e0d9b7162dd86a);
+            
+    
+            var marker_86c64cf0b2cc10151d6ee2e09c15f194 = L.marker(
+                [50.8503, 4.3517],
+                {
+}
+            ).addTo(map_2e82fdee10b72e807904377c8ae1abd9);
+        
+    
+            var div_icon_27cf993e527429275769f6aa3598657a = L.divIcon({
+  "html": "\n    \u003cdiv onclick=\"openLightbox(\u0027assets/magnets/full/Brussels.png\u0027, \u0027Brussels (Belgium)\u0027)\" \n         style=\"\n            width: 48px; \n            height: 48px; \n            border: 3px solid white; \n            border-radius: 8px; \n            box-shadow: 0 4px 10px rgba(0,0,0,0.35); \n            background-color: #ffffff;\n            background-image: url(\u0027assets/magnets/thumbs/Brussels.png\u0027); \n            background-size: cover; \n            background-position: center; \n            background-repeat: no-repeat;\n            cursor: pointer;\n            transition: transform 0.2s ease-in-out;\"\n         onmouseover=\"this.style.transform=\u0027scale(1.2)\u0027;\"\n         onmouseout=\"this.style.transform=\u0027scale(1)\u0027;\"\n    \u003e\u003c/div\u003e\n    ",
+  "iconSize": [48, 48],
+  "iconAnchor": [24, 24],
+  "className": "empty",
+});
+        
+    
+            marker_86c64cf0b2cc10151d6ee2e09c15f194.bindTooltip(
+                `<div>
+                     Brussels - Click to enlarge
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_86c64cf0b2cc10151d6ee2e09c15f194.setIcon(div_icon_27cf993e527429275769f6aa3598657a);
+            
+    
+            var marker_229429ff4a607de2a8e88a7b5a5ea06c = L.marker(
+                [47.4979, 19.0402],
+                {
+}
+            ).addTo(map_2e82fdee10b72e807904377c8ae1abd9);
+        
+    
+            var div_icon_01c349032c8f7a3903e83669f5638c4b = L.divIcon({
+  "html": "\n    \u003cdiv onclick=\"openLightbox(\u0027assets/magnets/full/Budapest.jpg\u0027, \u0027Budapest (Hungary)\u0027)\" \n         style=\"\n            width: 48px; \n            height: 48px; \n            border: 3px solid white; \n            border-radius: 8px; \n            box-shadow: 0 4px 10px rgba(0,0,0,0.35); \n            background-color: #ffffff;\n            background-image: url(\u0027assets/magnets/thumbs/Budapest.jpg\u0027); \n            background-size: cover; \n            background-position: center; \n            background-repeat: no-repeat;\n            cursor: pointer;\n            transition: transform 0.2s ease-in-out;\"\n         onmouseover=\"this.style.transform=\u0027scale(1.2)\u0027;\"\n         onmouseout=\"this.style.transform=\u0027scale(1)\u0027;\"\n    \u003e\u003c/div\u003e\n    ",
+  "iconSize": [48, 48],
+  "iconAnchor": [24, 24],
+  "className": "empty",
+});
+        
+    
+            marker_229429ff4a607de2a8e88a7b5a5ea06c.bindTooltip(
+                `<div>
+                     Budapest - Click to enlarge
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_229429ff4a607de2a8e88a7b5a5ea06c.setIcon(div_icon_01c349032c8f7a3903e83669f5638c4b);
+            
+    
+            var marker_e90c9d3bac5e6971f5b15776c2f558d8 = L.marker(
+                [50.9375, 6.9603],
+                {
+}
+            ).addTo(map_2e82fdee10b72e807904377c8ae1abd9);
+        
+    
+            var div_icon_6f69bf710f8cc35dd8134b8b39890de3 = L.divIcon({
+  "html": "\n    \u003cdiv onclick=\"openLightbox(\u0027assets/magnets/full/Cologne.png\u0027, \u0027Cologne (Germany)\u0027)\" \n         style=\"\n            width: 48px; \n            height: 48px; \n            border: 3px solid white; \n            border-radius: 8px; \n            box-shadow: 0 4px 10px rgba(0,0,0,0.35); \n            background-color: #ffffff;\n            background-image: url(\u0027assets/magnets/thumbs/Cologne.png\u0027); \n            background-size: cover; \n            background-position: center; \n            background-repeat: no-repeat;\n            cursor: pointer;\n            transition: transform 0.2s ease-in-out;\"\n         onmouseover=\"this.style.transform=\u0027scale(1.2)\u0027;\"\n         onmouseout=\"this.style.transform=\u0027scale(1)\u0027;\"\n    \u003e\u003c/div\u003e\n    ",
+  "iconSize": [48, 48],
+  "iconAnchor": [24, 24],
+  "className": "empty",
+});
+        
+    
+            marker_e90c9d3bac5e6971f5b15776c2f558d8.bindTooltip(
+                `<div>
+                     Cologne - Click to enlarge
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_e90c9d3bac5e6971f5b15776c2f558d8.setIcon(div_icon_6f69bf710f8cc35dd8134b8b39890de3);
+            
+    
+            var marker_395a63d5e13461f9fe5ba76bc5ad4a75 = L.marker(
+                [45.8173, 9.097],
+                {
+}
+            ).addTo(map_2e82fdee10b72e807904377c8ae1abd9);
+        
+    
+            var div_icon_e53fbb2ccd8a1889db7060c2a6a887a7 = L.divIcon({
+  "html": "\n    \u003cdiv onclick=\"openLightbox(\u0027assets/magnets/full/Como Brunate.jpg\u0027, \u0027Como Brunate (Italy)\u0027)\" \n         style=\"\n            width: 48px; \n            height: 48px; \n            border: 3px solid white; \n            border-radius: 8px; \n            box-shadow: 0 4px 10px rgba(0,0,0,0.35); \n            background-color: #ffffff;\n            background-image: url(\u0027assets/magnets/thumbs/Como Brunate.jpg\u0027); \n            background-size: cover; \n            background-position: center; \n            background-repeat: no-repeat;\n            cursor: pointer;\n            transition: transform 0.2s ease-in-out;\"\n         onmouseover=\"this.style.transform=\u0027scale(1.2)\u0027;\"\n         onmouseout=\"this.style.transform=\u0027scale(1)\u0027;\"\n    \u003e\u003c/div\u003e\n    ",
+  "iconSize": [48, 48],
+  "iconAnchor": [24, 24],
+  "className": "empty",
+});
+        
+    
+            marker_395a63d5e13461f9fe5ba76bc5ad4a75.bindTooltip(
+                `<div>
+                     Como Brunate - Click to enlarge
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_395a63d5e13461f9fe5ba76bc5ad4a75.setIcon(div_icon_e53fbb2ccd8a1889db7060c2a6a887a7);
+            
+    
+            var marker_e83fed345dde239dbd1fa7e97d4d43eb = L.marker(
+                [55.6761, 12.5683],
+                {
+}
+            ).addTo(map_2e82fdee10b72e807904377c8ae1abd9);
+        
+    
+            var div_icon_9bf84f1df6841597704a538e6d9364fd = L.divIcon({
+  "html": "\n    \u003cdiv onclick=\"openLightbox(\u0027assets/magnets/full/Copenhagen.jpg\u0027, \u0027Copenhagen (Denmark)\u0027)\" \n         style=\"\n            width: 48px; \n            height: 48px; \n            border: 3px solid white; \n            border-radius: 8px; \n            box-shadow: 0 4px 10px rgba(0,0,0,0.35); \n            background-color: #ffffff;\n            background-image: url(\u0027assets/magnets/thumbs/Copenhagen.jpg\u0027); \n            background-size: cover; \n            background-position: center; \n            background-repeat: no-repeat;\n            cursor: pointer;\n            transition: transform 0.2s ease-in-out;\"\n         onmouseover=\"this.style.transform=\u0027scale(1.2)\u0027;\"\n         onmouseout=\"this.style.transform=\u0027scale(1)\u0027;\"\n    \u003e\u003c/div\u003e\n    ",
+  "iconSize": [48, 48],
+  "iconAnchor": [24, 24],
+  "className": "empty",
+});
+        
+    
+            marker_e83fed345dde239dbd1fa7e97d4d43eb.bindTooltip(
+                `<div>
+                     Copenhagen - Click to enlarge
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_e83fed345dde239dbd1fa7e97d4d43eb.setIcon(div_icon_9bf84f1df6841597704a538e6d9364fd);
+            
+    
+            var marker_c71580c75b795318dbd65f51f5ee83be = L.marker(
+                [43.7102, 7.262],
+                {
+}
+            ).addTo(map_2e82fdee10b72e807904377c8ae1abd9);
+        
+    
+            var div_icon_5ccc534f127e8caf673c5daba5799e37 = L.divIcon({
+  "html": "\n    \u003cdiv onclick=\"openLightbox(\u0027assets/magnets/full/cd.jpg\u0027, \u0027C\u00f4te dAzur (France)\u0027)\" \n         style=\"\n            width: 48px; \n            height: 48px; \n            border: 3px solid white; \n            border-radius: 8px; \n            box-shadow: 0 4px 10px rgba(0,0,0,0.35); \n            background-color: #ffffff;\n            background-image: url(\u0027assets/magnets/thumbs/cd.jpg\u0027); \n            background-size: cover; \n            background-position: center; \n            background-repeat: no-repeat;\n            cursor: pointer;\n            transition: transform 0.2s ease-in-out;\"\n         onmouseover=\"this.style.transform=\u0027scale(1.2)\u0027;\"\n         onmouseout=\"this.style.transform=\u0027scale(1)\u0027;\"\n    \u003e\u003c/div\u003e\n    ",
+  "iconSize": [48, 48],
+  "iconAnchor": [24, 24],
+  "className": "empty",
+});
+        
+    
+            marker_c71580c75b795318dbd65f51f5ee83be.bindTooltip(
+                `<div>
+                     Côte dAzur - Click to enlarge
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_c71580c75b795318dbd65f51f5ee83be.setIcon(div_icon_5ccc534f127e8caf673c5daba5799e37);
+            
+    
+            var marker_3cf2470b05c71f1e55e512bf3defff0e = L.marker(
+                [51.5136, 7.4653],
+                {
+}
+            ).addTo(map_2e82fdee10b72e807904377c8ae1abd9);
+        
+    
+            var div_icon_24a81096ca0a2b0f1738b596d9af8624 = L.divIcon({
+  "html": "\n    \u003cdiv onclick=\"openLightbox(\u0027assets/magnets/full/Dortmund.jpg\u0027, \u0027Dortmund (Germany)\u0027)\" \n         style=\"\n            width: 48px; \n            height: 48px; \n            border: 3px solid white; \n            border-radius: 8px; \n            box-shadow: 0 4px 10px rgba(0,0,0,0.35); \n            background-color: #ffffff;\n            background-image: url(\u0027assets/magnets/thumbs/Dortmund.jpg\u0027); \n            background-size: cover; \n            background-position: center; \n            background-repeat: no-repeat;\n            cursor: pointer;\n            transition: transform 0.2s ease-in-out;\"\n         onmouseover=\"this.style.transform=\u0027scale(1.2)\u0027;\"\n         onmouseout=\"this.style.transform=\u0027scale(1)\u0027;\"\n    \u003e\u003c/div\u003e\n    ",
+  "iconSize": [48, 48],
+  "iconAnchor": [24, 24],
+  "className": "empty",
+});
+        
+    
+            marker_3cf2470b05c71f1e55e512bf3defff0e.bindTooltip(
+                `<div>
+                     Dortmund - Click to enlarge
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_3cf2470b05c71f1e55e512bf3defff0e.setIcon(div_icon_24a81096ca0a2b0f1738b596d9af8624);
+            
+    
+            var marker_6c6a04074d029f658f6fc3445d65f97c = L.marker(
+                [43.7696, 11.2558],
+                {
+}
+            ).addTo(map_2e82fdee10b72e807904377c8ae1abd9);
+        
+    
+            var div_icon_bf0d88127d1fcb9d072935d5163729d7 = L.divIcon({
+  "html": "\n    \u003cdiv onclick=\"openLightbox(\u0027assets/magnets/full/Florence.png\u0027, \u0027Florence (Italy)\u0027)\" \n         style=\"\n            width: 48px; \n            height: 48px; \n            border: 3px solid white; \n            border-radius: 8px; \n            box-shadow: 0 4px 10px rgba(0,0,0,0.35); \n            background-color: #ffffff;\n            background-image: url(\u0027assets/magnets/thumbs/Florence.png\u0027); \n            background-size: cover; \n            background-position: center; \n            background-repeat: no-repeat;\n            cursor: pointer;\n            transition: transform 0.2s ease-in-out;\"\n         onmouseover=\"this.style.transform=\u0027scale(1.2)\u0027;\"\n         onmouseout=\"this.style.transform=\u0027scale(1)\u0027;\"\n    \u003e\u003c/div\u003e\n    ",
+  "iconSize": [48, 48],
+  "iconAnchor": [24, 24],
+  "className": "empty",
+});
+        
+    
+            marker_6c6a04074d029f658f6fc3445d65f97c.bindTooltip(
+                `<div>
+                     Florence - Click to enlarge
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_6c6a04074d029f658f6fc3445d65f97c.setIcon(div_icon_bf0d88127d1fcb9d072935d5163729d7);
+            
+    
+            var marker_728869259b1b3f7c5e324df520fbbb55 = L.marker(
+                [46.2044, 6.1432],
+                {
+}
+            ).addTo(map_2e82fdee10b72e807904377c8ae1abd9);
+        
+    
+            var div_icon_8fcf1317a95dc9b387288f03e3cca0a4 = L.divIcon({
+  "html": "\n    \u003cdiv onclick=\"openLightbox(\u0027assets/magnets/full/Geneva.jpg\u0027, \u0027Geneva (Switzerland)\u0027)\" \n         style=\"\n            width: 48px; \n            height: 48px; \n            border: 3px solid white; \n            border-radius: 8px; \n            box-shadow: 0 4px 10px rgba(0,0,0,0.35); \n            background-color: #ffffff;\n            background-image: url(\u0027assets/magnets/thumbs/Geneva.jpg\u0027); \n            background-size: cover; \n            background-position: center; \n            background-repeat: no-repeat;\n            cursor: pointer;\n            transition: transform 0.2s ease-in-out;\"\n         onmouseover=\"this.style.transform=\u0027scale(1.2)\u0027;\"\n         onmouseout=\"this.style.transform=\u0027scale(1)\u0027;\"\n    \u003e\u003c/div\u003e\n    ",
+  "iconSize": [48, 48],
+  "iconAnchor": [24, 24],
+  "className": "empty",
+});
+        
+    
+            marker_728869259b1b3f7c5e324df520fbbb55.bindTooltip(
+                `<div>
+                     Geneva - Click to enlarge
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_728869259b1b3f7c5e324df520fbbb55.setIcon(div_icon_8fcf1317a95dc9b387288f03e3cca0a4);
+            
+    
+            var marker_c981b6921d416f750cbe5c2567a09c3d = L.marker(
+                [53.5511, 9.9937],
+                {
+}
+            ).addTo(map_2e82fdee10b72e807904377c8ae1abd9);
+        
+    
+            var div_icon_e29fb5fcd005e7bfd3fbe2009c8b1865 = L.divIcon({
+  "html": "\n    \u003cdiv onclick=\"openLightbox(\u0027assets/magnets/full/Hamburg.png\u0027, \u0027Hamburg (Germany)\u0027)\" \n         style=\"\n            width: 48px; \n            height: 48px; \n            border: 3px solid white; \n            border-radius: 8px; \n            box-shadow: 0 4px 10px rgba(0,0,0,0.35); \n            background-color: #ffffff;\n            background-image: url(\u0027assets/magnets/thumbs/Hamburg.png\u0027); \n            background-size: cover; \n            background-position: center; \n            background-repeat: no-repeat;\n            cursor: pointer;\n            transition: transform 0.2s ease-in-out;\"\n         onmouseover=\"this.style.transform=\u0027scale(1.2)\u0027;\"\n         onmouseout=\"this.style.transform=\u0027scale(1)\u0027;\"\n    \u003e\u003c/div\u003e\n    ",
+  "iconSize": [48, 48],
+  "iconAnchor": [24, 24],
+  "className": "empty",
+});
+        
+    
+            marker_c981b6921d416f750cbe5c2567a09c3d.bindTooltip(
+                `<div>
+                     Hamburg - Click to enlarge
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_c981b6921d416f750cbe5c2567a09c3d.setIcon(div_icon_e29fb5fcd005e7bfd3fbe2009c8b1865);
+            
+    
+            var marker_5eed78e4d171f8271d5395dc680abd19 = L.marker(
+                [50.0647, 19.945],
+                {
+}
+            ).addTo(map_2e82fdee10b72e807904377c8ae1abd9);
+        
+    
+            var div_icon_9c12b4dbf1830f20f5d9fc1b5255c3bf = L.divIcon({
+  "html": "\n    \u003cdiv onclick=\"openLightbox(\u0027assets/magnets/full/Krakov.png\u0027, \u0027Krak\u00f3w (Poland)\u0027)\" \n         style=\"\n            width: 48px; \n            height: 48px; \n            border: 3px solid white; \n            border-radius: 8px; \n            box-shadow: 0 4px 10px rgba(0,0,0,0.35); \n            background-color: #ffffff;\n            background-image: url(\u0027assets/magnets/thumbs/Krakov.png\u0027); \n            background-size: cover; \n            background-position: center; \n            background-repeat: no-repeat;\n            cursor: pointer;\n            transition: transform 0.2s ease-in-out;\"\n         onmouseover=\"this.style.transform=\u0027scale(1.2)\u0027;\"\n         onmouseout=\"this.style.transform=\u0027scale(1)\u0027;\"\n    \u003e\u003c/div\u003e\n    ",
+  "iconSize": [48, 48],
+  "iconAnchor": [24, 24],
+  "className": "empty",
+});
+        
+    
+            marker_5eed78e4d171f8271d5395dc680abd19.bindTooltip(
+                `<div>
+                     Kraków - Click to enlarge
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_5eed78e4d171f8271d5395dc680abd19.setIcon(div_icon_9c12b4dbf1830f20f5d9fc1b5255c3bf);
+            
+    
+            var marker_ad303da997309df081096c2794d323f0 = L.marker(
+                [49.6116, 6.1319],
+                {
+}
+            ).addTo(map_2e82fdee10b72e807904377c8ae1abd9);
+        
+    
+            var div_icon_9479fa06812f18bb271ef9dacababdcf = L.divIcon({
+  "html": "\n    \u003cdiv onclick=\"openLightbox(\u0027assets/magnets/full/Luxembourg.jpg\u0027, \u0027Luxembourg (Luxembourg)\u0027)\" \n         style=\"\n            width: 48px; \n            height: 48px; \n            border: 3px solid white; \n            border-radius: 8px; \n            box-shadow: 0 4px 10px rgba(0,0,0,0.35); \n            background-color: #ffffff;\n            background-image: url(\u0027assets/magnets/thumbs/Luxembourg.jpg\u0027); \n            background-size: cover; \n            background-position: center; \n            background-repeat: no-repeat;\n            cursor: pointer;\n            transition: transform 0.2s ease-in-out;\"\n         onmouseover=\"this.style.transform=\u0027scale(1.2)\u0027;\"\n         onmouseout=\"this.style.transform=\u0027scale(1)\u0027;\"\n    \u003e\u003c/div\u003e\n    ",
+  "iconSize": [48, 48],
+  "iconAnchor": [24, 24],
+  "className": "empty",
+});
+        
+    
+            marker_ad303da997309df081096c2794d323f0.bindTooltip(
+                `<div>
+                     Luxembourg - Click to enlarge
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_ad303da997309df081096c2794d323f0.setIcon(div_icon_9479fa06812f18bb271ef9dacababdcf);
+            
+    
+            var marker_8bce91523b6021e30f630bc2d2ea38b6 = L.marker(
+                [40.4168, -3.7038],
+                {
+}
+            ).addTo(map_2e82fdee10b72e807904377c8ae1abd9);
+        
+    
+            var div_icon_af84ee6f3c4984ca6db4dfc5e36d4612 = L.divIcon({
+  "html": "\n    \u003cdiv onclick=\"openLightbox(\u0027assets/magnets/full/Madrid.jpg\u0027, \u0027Madrid (Spain)\u0027)\" \n         style=\"\n            width: 48px; \n            height: 48px; \n            border: 3px solid white; \n            border-radius: 8px; \n            box-shadow: 0 4px 10px rgba(0,0,0,0.35); \n            background-color: #ffffff;\n            background-image: url(\u0027assets/magnets/thumbs/Madrid.jpg\u0027); \n            background-size: cover; \n            background-position: center; \n            background-repeat: no-repeat;\n            cursor: pointer;\n            transition: transform 0.2s ease-in-out;\"\n         onmouseover=\"this.style.transform=\u0027scale(1.2)\u0027;\"\n         onmouseout=\"this.style.transform=\u0027scale(1)\u0027;\"\n    \u003e\u003c/div\u003e\n    ",
+  "iconSize": [48, 48],
+  "iconAnchor": [24, 24],
+  "className": "empty",
+});
+        
+    
+            marker_8bce91523b6021e30f630bc2d2ea38b6.bindTooltip(
+                `<div>
+                     Madrid - Click to enlarge
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_8bce91523b6021e30f630bc2d2ea38b6.setIcon(div_icon_af84ee6f3c4984ca6db4dfc5e36d4612);
+            
+    
+            var marker_028dcabd4ae0de53b1e57ad9e337550f = L.marker(
+                [45.4642, 9.19],
+                {
+}
+            ).addTo(map_2e82fdee10b72e807904377c8ae1abd9);
+        
+    
+            var div_icon_cdda8e718f1189b14cc2fe2f9e09494b = L.divIcon({
+  "html": "\n    \u003cdiv onclick=\"openLightbox(\u0027assets/magnets/full/Milan.png\u0027, \u0027Milan (Italy)\u0027)\" \n         style=\"\n            width: 48px; \n            height: 48px; \n            border: 3px solid white; \n            border-radius: 8px; \n            box-shadow: 0 4px 10px rgba(0,0,0,0.35); \n            background-color: #ffffff;\n            background-image: url(\u0027assets/magnets/thumbs/Milan.png\u0027); \n            background-size: cover; \n            background-position: center; \n            background-repeat: no-repeat;\n            cursor: pointer;\n            transition: transform 0.2s ease-in-out;\"\n         onmouseover=\"this.style.transform=\u0027scale(1.2)\u0027;\"\n         onmouseout=\"this.style.transform=\u0027scale(1)\u0027;\"\n    \u003e\u003c/div\u003e\n    ",
+  "iconSize": [48, 48],
+  "iconAnchor": [24, 24],
+  "className": "empty",
+});
+        
+    
+            marker_028dcabd4ae0de53b1e57ad9e337550f.bindTooltip(
+                `<div>
+                     Milan - Click to enlarge
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_028dcabd4ae0de53b1e57ad9e337550f.setIcon(div_icon_cdda8e718f1189b14cc2fe2f9e09494b);
+            
+    
+            var marker_121b16ef72d53dca67a3f7b67200c88b = L.marker(
+                [40.8518, 14.2681],
+                {
+}
+            ).addTo(map_2e82fdee10b72e807904377c8ae1abd9);
+        
+    
+            var div_icon_708398f743cafd18a344384a7bcc1317 = L.divIcon({
+  "html": "\n    \u003cdiv onclick=\"openLightbox(\u0027assets/magnets/full/Napoli.jpg\u0027, \u0027Naples (Italy)\u0027)\" \n         style=\"\n            width: 48px; \n            height: 48px; \n            border: 3px solid white; \n            border-radius: 8px; \n            box-shadow: 0 4px 10px rgba(0,0,0,0.35); \n            background-color: #ffffff;\n            background-image: url(\u0027assets/magnets/thumbs/Napoli.jpg\u0027); \n            background-size: cover; \n            background-position: center; \n            background-repeat: no-repeat;\n            cursor: pointer;\n            transition: transform 0.2s ease-in-out;\"\n         onmouseover=\"this.style.transform=\u0027scale(1.2)\u0027;\"\n         onmouseout=\"this.style.transform=\u0027scale(1)\u0027;\"\n    \u003e\u003c/div\u003e\n    ",
+  "iconSize": [48, 48],
+  "iconAnchor": [24, 24],
+  "className": "empty",
+});
+        
+    
+            marker_121b16ef72d53dca67a3f7b67200c88b.bindTooltip(
+                `<div>
+                     Naples - Click to enlarge
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_121b16ef72d53dca67a3f7b67200c88b.setIcon(div_icon_708398f743cafd18a344384a7bcc1317);
+            
+    
+            var marker_1fa24c750c223fab0ad3ed16b9bb28f7 = L.marker(
+                [48.8566, 2.3522],
+                {
+}
+            ).addTo(map_2e82fdee10b72e807904377c8ae1abd9);
+        
+    
+            var div_icon_911ef609df34d3b454308d55ce746967 = L.divIcon({
+  "html": "\n    \u003cdiv onclick=\"openLightbox(\u0027assets/magnets/full/Paris.jpg\u0027, \u0027Paris (France)\u0027)\" \n         style=\"\n            width: 48px; \n            height: 48px; \n            border: 3px solid white; \n            border-radius: 8px; \n            box-shadow: 0 4px 10px rgba(0,0,0,0.35); \n            background-color: #ffffff;\n            background-image: url(\u0027assets/magnets/thumbs/Paris.jpg\u0027); \n            background-size: cover; \n            background-position: center; \n            background-repeat: no-repeat;\n            cursor: pointer;\n            transition: transform 0.2s ease-in-out;\"\n         onmouseover=\"this.style.transform=\u0027scale(1.2)\u0027;\"\n         onmouseout=\"this.style.transform=\u0027scale(1)\u0027;\"\n    \u003e\u003c/div\u003e\n    ",
+  "iconSize": [48, 48],
+  "iconAnchor": [24, 24],
+  "className": "empty",
+});
+        
+    
+            marker_1fa24c750c223fab0ad3ed16b9bb28f7.bindTooltip(
+                `<div>
+                     Paris - Click to enlarge
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_1fa24c750c223fab0ad3ed16b9bb28f7.setIcon(div_icon_911ef609df34d3b454308d55ce746967);
+            
+    
+            var marker_4d558dcc1a5c53b89dd74aa961308b27 = L.marker(
+                [44.8654, 15.6025],
+                {
+}
+            ).addTo(map_2e82fdee10b72e807904377c8ae1abd9);
+        
+    
+            var div_icon_4461886cddba0832588a3101684cf574 = L.divIcon({
+  "html": "\n    \u003cdiv onclick=\"openLightbox(\u0027assets/magnets/full/Plitvice Croatia.jpg\u0027, \u0027Plitvice Lakes (Croatia)\u0027)\" \n         style=\"\n            width: 48px; \n            height: 48px; \n            border: 3px solid white; \n            border-radius: 8px; \n            box-shadow: 0 4px 10px rgba(0,0,0,0.35); \n            background-color: #ffffff;\n            background-image: url(\u0027assets/magnets/thumbs/Plitvice Croatia.jpg\u0027); \n            background-size: cover; \n            background-position: center; \n            background-repeat: no-repeat;\n            cursor: pointer;\n            transition: transform 0.2s ease-in-out;\"\n         onmouseover=\"this.style.transform=\u0027scale(1.2)\u0027;\"\n         onmouseout=\"this.style.transform=\u0027scale(1)\u0027;\"\n    \u003e\u003c/div\u003e\n    ",
+  "iconSize": [48, 48],
+  "iconAnchor": [24, 24],
+  "className": "empty",
+});
+        
+    
+            marker_4d558dcc1a5c53b89dd74aa961308b27.bindTooltip(
+                `<div>
+                     Plitvice Lakes - Click to enlarge
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_4d558dcc1a5c53b89dd74aa961308b27.setIcon(div_icon_4461886cddba0832588a3101684cf574);
+            
+    
+            var marker_1cc74fdde9744a251a2397e8736c1bb8 = L.marker(
+                [50.0755, 14.4378],
+                {
+}
+            ).addTo(map_2e82fdee10b72e807904377c8ae1abd9);
+        
+    
+            var div_icon_2efb10b53caadddb054f7a7fbb8a02ae = L.divIcon({
+  "html": "\n    \u003cdiv onclick=\"openLightbox(\u0027assets/magnets/full/Prague.png\u0027, \u0027Prague (Czechia)\u0027)\" \n         style=\"\n            width: 48px; \n            height: 48px; \n            border: 3px solid white; \n            border-radius: 8px; \n            box-shadow: 0 4px 10px rgba(0,0,0,0.35); \n            background-color: #ffffff;\n            background-image: url(\u0027assets/magnets/thumbs/Prague.png\u0027); \n            background-size: cover; \n            background-position: center; \n            background-repeat: no-repeat;\n            cursor: pointer;\n            transition: transform 0.2s ease-in-out;\"\n         onmouseover=\"this.style.transform=\u0027scale(1.2)\u0027;\"\n         onmouseout=\"this.style.transform=\u0027scale(1)\u0027;\"\n    \u003e\u003c/div\u003e\n    ",
+  "iconSize": [48, 48],
+  "iconAnchor": [24, 24],
+  "className": "empty",
+});
+        
+    
+            marker_1cc74fdde9744a251a2397e8736c1bb8.bindTooltip(
+                `<div>
+                     Prague - Click to enlarge
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_1cc74fdde9744a251a2397e8736c1bb8.setIcon(div_icon_2efb10b53caadddb054f7a7fbb8a02ae);
+            
+    
+            var marker_44a5c86c8ff634ffc693bbffe1b0d3dd = L.marker(
+                [41.9028, 12.4964],
+                {
+}
+            ).addTo(map_2e82fdee10b72e807904377c8ae1abd9);
+        
+    
+            var div_icon_9971bb458ccd5318db1a187388080685 = L.divIcon({
+  "html": "\n    \u003cdiv onclick=\"openLightbox(\u0027assets/magnets/full/Rome.png\u0027, \u0027Rome (Italy)\u0027)\" \n         style=\"\n            width: 48px; \n            height: 48px; \n            border: 3px solid white; \n            border-radius: 8px; \n            box-shadow: 0 4px 10px rgba(0,0,0,0.35); \n            background-color: #ffffff;\n            background-image: url(\u0027assets/magnets/thumbs/Rome.png\u0027); \n            background-size: cover; \n            background-position: center; \n            background-repeat: no-repeat;\n            cursor: pointer;\n            transition: transform 0.2s ease-in-out;\"\n         onmouseover=\"this.style.transform=\u0027scale(1.2)\u0027;\"\n         onmouseout=\"this.style.transform=\u0027scale(1)\u0027;\"\n    \u003e\u003c/div\u003e\n    ",
+  "iconSize": [48, 48],
+  "iconAnchor": [24, 24],
+  "className": "empty",
+});
+        
+    
+            marker_44a5c86c8ff634ffc693bbffe1b0d3dd.bindTooltip(
+                `<div>
+                     Rome - Click to enlarge
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_44a5c86c8ff634ffc693bbffe1b0d3dd.setIcon(div_icon_9971bb458ccd5318db1a187388080685);
+            
+    
+            var marker_1cef78bb5107b6ac9c206f3d47b29170 = L.marker(
+                [51.9244, 4.4777],
+                {
+}
+            ).addTo(map_2e82fdee10b72e807904377c8ae1abd9);
+        
+    
+            var div_icon_c933542fcd5f1f0109fc9ff91be0676c = L.divIcon({
+  "html": "\n    \u003cdiv onclick=\"openLightbox(\u0027assets/magnets/full/Rotterdam.png\u0027, \u0027Rotterdam (Netherlands)\u0027)\" \n         style=\"\n            width: 48px; \n            height: 48px; \n            border: 3px solid white; \n            border-radius: 8px; \n            box-shadow: 0 4px 10px rgba(0,0,0,0.35); \n            background-color: #ffffff;\n            background-image: url(\u0027assets/magnets/thumbs/Rotterdam.png\u0027); \n            background-size: cover; \n            background-position: center; \n            background-repeat: no-repeat;\n            cursor: pointer;\n            transition: transform 0.2s ease-in-out;\"\n         onmouseover=\"this.style.transform=\u0027scale(1.2)\u0027;\"\n         onmouseout=\"this.style.transform=\u0027scale(1)\u0027;\"\n    \u003e\u003c/div\u003e\n    ",
+  "iconSize": [48, 48],
+  "iconAnchor": [24, 24],
+  "className": "empty",
+});
+        
+    
+            marker_1cef78bb5107b6ac9c206f3d47b29170.bindTooltip(
+                `<div>
+                     Rotterdam - Click to enlarge
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_1cef78bb5107b6ac9c206f3d47b29170.setIcon(div_icon_c933542fcd5f1f0109fc9ff91be0676c);
+            
+    
+            var marker_9eeaafa1d6c738e5bda201a2c931382d = L.marker(
+                [52.0705, 4.3007],
+                {
+}
+            ).addTo(map_2e82fdee10b72e807904377c8ae1abd9);
+        
+    
+            var div_icon_98d6c18e4657001a13773abdf5cef152 = L.divIcon({
+  "html": "\n    \u003cdiv onclick=\"openLightbox(\u0027assets/magnets/full/The Hague.jpg\u0027, \u0027The Hague (Netherlands)\u0027)\" \n         style=\"\n            width: 48px; \n            height: 48px; \n            border: 3px solid white; \n            border-radius: 8px; \n            box-shadow: 0 4px 10px rgba(0,0,0,0.35); \n            background-color: #ffffff;\n            background-image: url(\u0027assets/magnets/thumbs/The Hague.jpg\u0027); \n            background-size: cover; \n            background-position: center; \n            background-repeat: no-repeat;\n            cursor: pointer;\n            transition: transform 0.2s ease-in-out;\"\n         onmouseover=\"this.style.transform=\u0027scale(1.2)\u0027;\"\n         onmouseout=\"this.style.transform=\u0027scale(1)\u0027;\"\n    \u003e\u003c/div\u003e\n    ",
+  "iconSize": [48, 48],
+  "iconAnchor": [24, 24],
+  "className": "empty",
+});
+        
+    
+            marker_9eeaafa1d6c738e5bda201a2c931382d.bindTooltip(
+                `<div>
+                     The Hague - Click to enlarge
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_9eeaafa1d6c738e5bda201a2c931382d.setIcon(div_icon_98d6c18e4657001a13773abdf5cef152);
+            
+    
+            var marker_1b7718c670deeb234051dd9bc7c93621 = L.marker(
+                [45.4408, 12.3155],
+                {
+}
+            ).addTo(map_2e82fdee10b72e807904377c8ae1abd9);
+        
+    
+            var div_icon_19fac5bce23d0acdf9b1f812253a9632 = L.divIcon({
+  "html": "\n    \u003cdiv onclick=\"openLightbox(\u0027assets/magnets/full/Venice.jpg\u0027, \u0027Venice (Italy)\u0027)\" \n         style=\"\n            width: 48px; \n            height: 48px; \n            border: 3px solid white; \n            border-radius: 8px; \n            box-shadow: 0 4px 10px rgba(0,0,0,0.35); \n            background-color: #ffffff;\n            background-image: url(\u0027assets/magnets/thumbs/Venice.jpg\u0027); \n            background-size: cover; \n            background-position: center; \n            background-repeat: no-repeat;\n            cursor: pointer;\n            transition: transform 0.2s ease-in-out;\"\n         onmouseover=\"this.style.transform=\u0027scale(1.2)\u0027;\"\n         onmouseout=\"this.style.transform=\u0027scale(1)\u0027;\"\n    \u003e\u003c/div\u003e\n    ",
+  "iconSize": [48, 48],
+  "iconAnchor": [24, 24],
+  "className": "empty",
+});
+        
+    
+            marker_1b7718c670deeb234051dd9bc7c93621.bindTooltip(
+                `<div>
+                     Venice - Click to enlarge
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_1b7718c670deeb234051dd9bc7c93621.setIcon(div_icon_19fac5bce23d0acdf9b1f812253a9632);
+            
+    
+            var marker_868e42b1a82420d512fe08d3ff2f7b66 = L.marker(
+                [48.2082, 16.3738],
+                {
+}
+            ).addTo(map_2e82fdee10b72e807904377c8ae1abd9);
+        
+    
+            var div_icon_5065d89c086b5045ce2996c517684395 = L.divIcon({
+  "html": "\n    \u003cdiv onclick=\"openLightbox(\u0027assets/magnets/full/Vienna.png\u0027, \u0027Vienna (Austria)\u0027)\" \n         style=\"\n            width: 48px; \n            height: 48px; \n            border: 3px solid white; \n            border-radius: 8px; \n            box-shadow: 0 4px 10px rgba(0,0,0,0.35); \n            background-color: #ffffff;\n            background-image: url(\u0027assets/magnets/thumbs/Vienna.png\u0027); \n            background-size: cover; \n            background-position: center; \n            background-repeat: no-repeat;\n            cursor: pointer;\n            transition: transform 0.2s ease-in-out;\"\n         onmouseover=\"this.style.transform=\u0027scale(1.2)\u0027;\"\n         onmouseout=\"this.style.transform=\u0027scale(1)\u0027;\"\n    \u003e\u003c/div\u003e\n    ",
+  "iconSize": [48, 48],
+  "iconAnchor": [24, 24],
+  "className": "empty",
+});
+        
+    
+            marker_868e42b1a82420d512fe08d3ff2f7b66.bindTooltip(
+                `<div>
+                     Vienna - Click to enlarge
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_868e42b1a82420d512fe08d3ff2f7b66.setIcon(div_icon_5065d89c086b5045ce2996c517684395);
+            
+    
+            var marker_2a76647c17e639e029dfa2ab338254aa = L.marker(
+                [45.815, 15.9819],
+                {
+}
+            ).addTo(map_2e82fdee10b72e807904377c8ae1abd9);
+        
+    
+            var div_icon_c8ddbbfcdfee858ce70e87d61a197a15 = L.divIcon({
+  "html": "\n    \u003cdiv onclick=\"openLightbox(\u0027assets/magnets/full/Zagreb.png\u0027, \u0027Zagreb (Croatia)\u0027)\" \n         style=\"\n            width: 48px; \n            height: 48px; \n            border: 3px solid white; \n            border-radius: 8px; \n            box-shadow: 0 4px 10px rgba(0,0,0,0.35); \n            background-color: #ffffff;\n            background-image: url(\u0027assets/magnets/thumbs/Zagreb.png\u0027); \n            background-size: cover; \n            background-position: center; \n            background-repeat: no-repeat;\n            cursor: pointer;\n            transition: transform 0.2s ease-in-out;\"\n         onmouseover=\"this.style.transform=\u0027scale(1.2)\u0027;\"\n         onmouseout=\"this.style.transform=\u0027scale(1)\u0027;\"\n    \u003e\u003c/div\u003e\n    ",
+  "iconSize": [48, 48],
+  "iconAnchor": [24, 24],
+  "className": "empty",
+});
+        
+    
+            marker_2a76647c17e639e029dfa2ab338254aa.bindTooltip(
+                `<div>
+                     Zagreb - Click to enlarge
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_2a76647c17e639e029dfa2ab338254aa.setIcon(div_icon_c8ddbbfcdfee858ce70e87d61a197a15);
+            
+    
+            map_2e82fdee10b72e807904377c8ae1abd9.fitBounds(
+                [[52.3676, 4.9041], [41.3879, 2.1699], [52.52, 13.405], [46.3683, 14.1146], [48.1486, 17.1077], [50.8503, 4.3517], [47.4979, 19.0402], [50.9375, 6.9603], [45.8173, 9.097], [55.6761, 12.5683], [43.7102, 7.262], [51.5136, 7.4653], [43.7696, 11.2558], [46.2044, 6.1432], [53.5511, 9.9937], [50.0647, 19.945], [49.6116, 6.1319], [40.4168, -3.7038], [45.4642, 9.19], [40.8518, 14.2681], [48.8566, 2.3522], [44.8654, 15.6025], [50.0755, 14.4378], [41.9028, 12.4964], [51.9244, 4.4777], [52.0705, 4.3007], [45.4408, 12.3155], [48.2082, 16.3738], [45.815, 15.9819]],
+                {"padding": [30, 30]}
+            );
+        
+</script>
+</html>
